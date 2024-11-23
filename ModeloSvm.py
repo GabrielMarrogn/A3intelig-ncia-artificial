@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 # Carregando o dataset inflacao, e gerenciando as variaveis 
 data = pd.read_csv("inflacao.csv")
@@ -12,7 +14,7 @@ y = data['ipca_variacao']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=33)
 
 #Criando e treinando o modelo Svm usando SVR
-model = svm.SVR()
+model = make_pipeline(StandardScaler(), svm.SVR())
 model.fit(X_train, y_train)
 
 # Fazendo previsões
