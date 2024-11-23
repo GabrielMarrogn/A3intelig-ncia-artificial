@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 import os
 
 #Evitar problemas relacionados a decteção de cores do computador,sem essa parte o programa não roda 
@@ -16,7 +18,8 @@ y = data['ipca_variacao']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=33)
  
 # Criando e treinando o modelo KNN usando regressão
-model = KNeighborsRegressor(n_neighbors=3)
+#Usando Pipeline para pre-processar os dados
+model = make_pipeline(StandardScaler(),KNeighborsRegressor(n_neighbors=3))
 model.fit(X_train, y_train)
  
 # Fazendo previsões do modelo 
