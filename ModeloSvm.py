@@ -15,7 +15,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 #Criando e treinando o modelo Svm usando SVR
 #Usando Pipeline para pre-processar os dados 
-model = make_pipeline(StandardScaler(), svm.SVR())
+model = make_pipeline(StandardScaler(), svm.SVR(kernel='linear'))
 model.fit(X_train, y_train)
 
 # Fazendo previsões
